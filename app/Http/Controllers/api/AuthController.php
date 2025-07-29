@@ -763,13 +763,13 @@ public function handleSocialLogin(Request $request){
             ->where('user_type', 'user') // Or 'passenger' or whatever your logic uses
             ->sum('received_points');
         
-        // $totalRewardPoints = $driverPoints + $userPoints;
+        $totalRewardPoints = $driverPoints + $userPoints;
 
         // Attach ride count to the user details
         $userDetail->publish_ride_count = $rideCount;
-        // $userDetail->driver_points = $driverPoints;
-        // $userDetail->user_points = $userPoints;
-        // $userDetail->total_reward_points = $totalRewardPoints;
+        $userDetail->driver_points = $driverPoints;
+        $userDetail->user_points = $userPoints;
+        $userDetail->total_reward_points = $totalRewardPoints;
 
         return $this->apiResponse('success',200, 'Fetched User Details successfully', $userDetail );
 
