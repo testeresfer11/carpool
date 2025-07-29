@@ -755,21 +755,21 @@ public function handleSocialLogin(Request $request){
 
         $driverPoints = \DB::table('reward_points')
         ->where('user_id', $user_id)
-        ->where('user_type', 'driver') // Assuming 'driver' is stored as a string
+        ->where('user_type', 'driver') 
         ->sum('received_points');
         
         $userPoints = \DB::table('reward_points')
             ->where('user_id', $user_id)
-            ->where('user_type', 'user') // Or 'passenger' or whatever your logic uses
+            ->where('user_type', 'user') 
             ->sum('received_points');
         
-        // $totalRewardPoints = $driverPoints + $userPoints;
+        $totalRewardPoints = $driverPoints + $userPoints;
 
         // Attach ride count to the user details
         $userDetail->publish_ride_count = $rideCount;
-        // $userDetail->driver_points = $driverPoints;
-        // $userDetail->user_points = $userPoints;
-        // $userDetail->total_reward_points = $totalRewardPoints;
+        $userDetail->driver_points = $driverPoints;
+        $userDetail->user_points = $userPoints;
+        $userDetail->total_reward_points = $totalRewardPoints;
 
         return $this->apiResponse('success',200, 'Fetched User Details successfully', $userDetail );
 
