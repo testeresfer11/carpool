@@ -189,10 +189,6 @@ Route::middleware(['CustomSanctumMiddleware'])->group(function () {
         Route::post('update-car','updateCar');
         Route::get('delete-car','deleteCar');
     });
-
-    Route::controller(RewardPointController::class)->group(function () {
-        Route::get('/reward-points/by-user-type','getByUserType');
-    });
     
     Route::controller(PayPalController::class)->group(function () {
         Route::post('paypal/create-payment','createPayment')->name('paypal.createPayment');
