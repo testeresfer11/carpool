@@ -191,7 +191,7 @@ Route::middleware(['CustomSanctumMiddleware'])->group(function () {
     });
 
     Route::controller(RewardPointController::class)->group(function () {
-        Route::middleware('auth:api')->get('/reward-points/by-user-type','getByUserType');
+        Route::get('reward-points','getByUserType');
     });
     
     Route::controller(PayPalController::class)->group(function () {
